@@ -1,0 +1,30 @@
+plugins {
+    id 'application'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'com.basketbandit'
+project.version = '0.1.0'
+sourceCompatibility = 1.8
+mainClassName = 'com.basketbandit.DiscordPlaysWSClient'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+    maven { url = 'https://jitpack.io' }
+}
+
+ext {
+    slf4jApi   = '2.0.0-alpha1'  // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+}
+
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: slf4jApi
+}
