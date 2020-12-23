@@ -152,8 +152,8 @@ public class DiscordPlaysWSClient implements ActionListener {
             f.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 85, 50, 50).build());
             f.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 195, 50, 50).build());
 
-            f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(100, 400, 150, 50).build());
-            f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(255, 400, 150, 50).build());
+            f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 365, 150, 50).build());
+            f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 365, 150, 50).build());
 
             f.add(new ButtonBuilder("Connect").addActionListener(this).setActionCommand("connect").setBounds(5, 455, 260, 50).build());
             f.add(new ButtonBuilder("Disconnect").addActionListener(this).setActionCommand("disconnect").setBounds(280, 455, 260, 50).build());
