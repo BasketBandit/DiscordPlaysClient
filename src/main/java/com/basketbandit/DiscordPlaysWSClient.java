@@ -2,8 +2,9 @@ package com.basketbandit;
 
 import com.basketbandit.scheduler.ScheduleHandler;
 import com.basketbandit.scheduler.jobs.FiveSecondlyJob;
-import com.basketbandit.scheduler.jobs.FourMillisecondlyJob;
+import com.basketbandit.scheduler.jobs.TenMillisecondlyJob;
 import com.basketbandit.utilities.ButtonBuilder;
+import com.basketbandit.utilities.MenuItemBuilder;
 import com.github.strikerx3.jxinput.XInputDevice;
 import com.github.strikerx3.jxinput.XInputDevice14;
 import com.github.strikerx3.jxinput.enums.XInputButton;
@@ -27,12 +28,9 @@ public class DiscordPlaysWSClient implements ActionListener {
     public static Socket clientSocket = new Socket();
     private static PrintWriter out;
     private static BufferedReader in;
-
     private String ip = "127.0.0.1";
     private int port = 0;
-
     public static final JFrame f = new JFrame();
-
     public static XInputDevice device;
 
     public static void main(String[] args) {
@@ -51,21 +49,30 @@ public class DiscordPlaysWSClient implements ActionListener {
         initController();
         startConnection(ip, port);
         ScheduleHandler.registerJob(new FiveSecondlyJob());
-        ScheduleHandler.registerJob(new FourMillisecondlyJob());
+        ScheduleHandler.registerJob(new TenMillisecondlyJob());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("connect")) {
-            if(clientSocket.isClosed()) {
-                startConnection(ip, port);
+        switch(e.getActionCommand()) {
+            case "connect" : {
+                if(clientSocket.isClosed()) {
+                    startConnection(ip, port);
+                }
+                return;
             }
-            return;
-        } else if(e.getActionCommand().equals("disconnect")) {
-            if(!clientSocket.isClosed()) {
-                stopConnection();
+            case "disconnect" : {
+                if(!clientSocket.isClosed()) {
+                    stopConnection();
+                }
+                return;
             }
-            return;
+            case "connect_controller" : {
+                if(!device.isConnected()) {
+                    initController();
+                }
+                return;
+            }
         }
         sendMessage(e.getActionCommand());
     }
@@ -157,10 +164,15 @@ public class DiscordPlaysWSClient implements ActionListener {
         f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 365, 150, 50).build());
         f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 365, 150, 50).build());
 
-        f.add(new ButtonBuilder("Connect").addActionListener(this).setActionCommand("connect").setBounds(5, 455, 260, 50).build());
-        f.add(new ButtonBuilder("Disconnect").addActionListener(this).setActionCommand("disconnect").setBounds(280, 455, 260, 50).build());
+        JMenuBar bar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        menu.add(new MenuItemBuilder("Socket Connect").addActionListener(this).setActionCommand("connect").build());
+        menu.add(new MenuItemBuilder("Socket Disconnect").addActionListener(this).setActionCommand("disconnect").build());
+        menu.add(new MenuItemBuilder("Controller Connect").addActionListener(this).setActionCommand("connect_controller").build());
+        bar.add(menu);
 
-        f.setSize(550, 550);
+        f.setJMenuBar(bar);
+        f.setSize(600, 485);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLayout(null);
