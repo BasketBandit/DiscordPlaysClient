@@ -1,7 +1,7 @@
 package com.basketbandit;
 
 import com.basketbandit.scheduler.ScheduleHandler;
-import com.basketbandit.scheduler.jobs.FiftyMillisecondlyJob;
+import com.basketbandit.scheduler.jobs.FourMillisecondlyJob;
 import com.basketbandit.scheduler.jobs.FiveSecondlyJob;
 import com.basketbandit.utilities.ButtonBuilder;
 import com.github.strikerx3.jxinput.XInputDevice;
@@ -48,7 +48,7 @@ public class DiscordPlaysWSClient implements ActionListener {
         initController();
         startConnection(ip, port);
         ScheduleHandler.registerJob(new FiveSecondlyJob());
-        ScheduleHandler.registerJob(new FiftyMillisecondlyJob());
+        ScheduleHandler.registerJob(new FourMillisecondlyJob());
     }
 
     @Override

@@ -5,11 +5,11 @@ import com.basketbandit.scheduler.tasks.PollDeviceTask;
 
 import java.util.concurrent.TimeUnit;
 
-public class FiftyMillisecondlyJob extends Job {
+public class FourMillisecondlyJob extends Job {
     private final PollDeviceTask pollDeviceTask = new PollDeviceTask();
 
-    public FiftyMillisecondlyJob() {
-        super(0, 50, TimeUnit.MILLISECONDS);
+    public FourMillisecondlyJob() {
+        super(0, 4, TimeUnit.MILLISECONDS);
     }
 
     @Override
