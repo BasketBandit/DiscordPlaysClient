@@ -11,6 +11,7 @@ import com.github.strikerx3.jxinput.exceptions.XInputNotLoadedException;
 import com.github.strikerx3.jxinput.listener.SimpleXInputDeviceListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,31 +19,34 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 public class DiscordPlaysWSClient implements ActionListener {
     private static final Logger log = LoggerFactory.getLogger(DiscordPlaysWSClient.class);
-    public static final String VERSION = "0.2.0";
+    public static final String VERSION = "0.3.0";
     public static Socket clientSocket = new Socket();
     private static PrintWriter out;
     private static BufferedReader in;
 
-    private final String ip;
-    private final int port;
+    private String ip = "127.0.0.1";
+    private int port = 0;
 
     public static final JFrame f = new JFrame();
 
     public static XInputDevice device;
 
     public static void main(String[] args) {
-        if(args.length < 2) {
-            System.exit(1);
-        }
-        new DiscordPlaysWSClient(args);
+        new DiscordPlaysWSClient();
     }
 
-    DiscordPlaysWSClient(String[] args) {
-        ip = args[0];
-        port = Integer.parseInt(args[1]);
+    DiscordPlaysWSClient() {
+        try(InputStream inputStream = new FileInputStream("./config.yaml")) {
+            Map<String, String> config = new Yaml().load(inputStream);
+            ip = config.get("ip_address");
+            port = Integer.parseInt(config.get("port"));
+        } catch(IOException e) {
+            log.error("There was an error loading the configuration file, message: {}", e.getMessage(), e);
+        }
         initGUI();
         initController();
         startConnection(ip, port);
@@ -68,7 +72,7 @@ public class DiscordPlaysWSClient implements ActionListener {
 
     public void startConnection(String ip, int port) {
         try {
-            log.info("Connecting to websocket on address: {}", ip + ":" + port);
+            log.info("Connecting to socket on address: {}", ip + ":" + port);
             clientSocket = new Socket(ip, port);
             clientSocket.setKeepAlive(true);
             out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8), true);
