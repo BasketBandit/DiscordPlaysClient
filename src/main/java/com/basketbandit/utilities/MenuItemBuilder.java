@@ -28,11 +28,6 @@ public class MenuItemBuilder {
         return this;
     }
 
-    public MenuItemBuilder setBounds(int x, int y, int width, int height) {
-        this.item.setBounds(x, y, width, height);
-        return this;
-    }
-
     public JMenuItem build() {
             return this.item;
         }
