@@ -3,19 +3,13 @@ package com.basketbandit.utilities;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class ButtonBuilder {
-    private JButton button;
-    Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/unifont-13.0.04.ttf")).deriveFont(Font.PLAIN, 32);
+    private final JButton button;
 
-    public ButtonBuilder() throws IOException, FontFormatException {
-        this.button = new JButton();
-    }
-
-    public ButtonBuilder(String text) throws IOException, FontFormatException {
+    public ButtonBuilder(String text) {
         this.button = new JButton(text);
-        this.button.setFont(font);
+        this.button.setFont(Fonts.DEFAULT);
         this.button.setMargin(new Insets(-10, -10, -10, -10));
     }
 

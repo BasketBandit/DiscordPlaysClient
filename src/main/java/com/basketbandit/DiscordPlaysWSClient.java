@@ -1,8 +1,8 @@
 package com.basketbandit;
 
 import com.basketbandit.scheduler.ScheduleHandler;
-import com.basketbandit.scheduler.jobs.FourMillisecondlyJob;
 import com.basketbandit.scheduler.jobs.FiveSecondlyJob;
+import com.basketbandit.scheduler.jobs.FourMillisecondlyJob;
 import com.basketbandit.utilities.ButtonBuilder;
 import com.github.strikerx3.jxinput.XInputDevice;
 import com.github.strikerx3.jxinput.XInputDevice14;
@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -128,43 +127,39 @@ public class DiscordPlaysWSClient implements ActionListener {
     }
 
     private void initGUI() {
-        try {
-            f.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("🇦").setBounds(445, 195, 50, 50).build());
-            f.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("🇧").setBounds(390, 250, 50, 50).build());
-            f.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("🇽").setBounds(390, 140, 50, 50).build());
-            f.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("🇾").setBounds(335, 195, 50, 50).build());
-            f.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("🇱").setBounds(60, 20, 150, 50).build());
-            f.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("🇷").setBounds(335, 20, 150, 50).build());
+        f.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("🇦").setBounds(445, 195, 50, 50).build());
+        f.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("🇧").setBounds(390, 250, 50, 50).build());
+        f.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("🇽").setBounds(390, 140, 50, 50).build());
+        f.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("🇾").setBounds(335, 195, 50, 50).build());
+        f.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("🇱").setBounds(60, 20, 150, 50).build());
+        f.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("🇷").setBounds(335, 20, 150, 50).build());
 
-            f.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("🅱️").setBounds(445, 250, 50, 50).build());
+        f.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("🅱️").setBounds(445, 250, 50, 50).build());
 
-            f.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("➡️").setBounds(170, 195, 50, 50).build());
-            f.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("⬇️").setBounds(115, 250, 50, 50).build());
-            f.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("⬆️").setBounds(115, 140, 50, 50).build());
-            f.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("⬅️").setBounds(60, 195, 50, 50).build());
-            f.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("↗️").setBounds(170, 140, 50, 50).build());
-            f.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("↘️").setBounds(170, 250, 50, 50).build());
-            f.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("↖️").setBounds(60, 140, 50, 50).build());
-            f.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("↙️").setBounds(60, 250, 50, 50).build());
+        f.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("➡️").setBounds(170, 195, 50, 50).build());
+        f.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("⬇️").setBounds(115, 250, 50, 50).build());
+        f.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("⬆️").setBounds(115, 140, 50, 50).build());
+        f.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("⬅️").setBounds(60, 195, 50, 50).build());
+        f.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("↗️").setBounds(170, 140, 50, 50).build());
+        f.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("↘️").setBounds(170, 250, 50, 50).build());
+        f.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("↖️").setBounds(60, 140, 50, 50).build());
+        f.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("↙️").setBounds(60, 250, 50, 50).build());
 
-            f.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("⏩").setBounds(225, 195, 50, 50).build());
-            f.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("⏬").setBounds(115, 305, 50, 50).build());
-            f.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 85, 50, 50).build());
-            f.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 195, 50, 50).build());
+        f.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("⏩").setBounds(225, 195, 50, 50).build());
+        f.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("⏬").setBounds(115, 305, 50, 50).build());
+        f.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 85, 50, 50).build());
+        f.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 195, 50, 50).build());
 
-            f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 365, 150, 50).build());
-            f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 365, 150, 50).build());
+        f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 365, 150, 50).build());
+        f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 365, 150, 50).build());
 
-            f.add(new ButtonBuilder("Connect").addActionListener(this).setActionCommand("connect").setBounds(5, 455, 260, 50).build());
-            f.add(new ButtonBuilder("Disconnect").addActionListener(this).setActionCommand("disconnect").setBounds(280, 455, 260, 50).build());
+        f.add(new ButtonBuilder("Connect").addActionListener(this).setActionCommand("connect").setBounds(5, 455, 260, 50).build());
+        f.add(new ButtonBuilder("Disconnect").addActionListener(this).setActionCommand("disconnect").setBounds(280, 455, 260, 50).build());
 
-            f.setSize(550, 550);
-            f.setResizable(false);
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setLayout(null);
-            f.setVisible(true);
-        } catch(IOException | FontFormatException e) {
-            log.error("There was a problem initialising GUI, message: {}", e.getMessage(), e);
-        }
+        f.setSize(550, 550);
+        f.setResizable(false);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLayout(null);
+        f.setVisible(true);
     }
 }
