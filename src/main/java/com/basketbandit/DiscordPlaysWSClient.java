@@ -29,7 +29,7 @@ public class DiscordPlaysWSClient implements ActionListener {
     private static BufferedReader in;
     private String ip = "127.0.0.1"; // default ip
     private int port = 3197; // default port
-    public static final JFrame f = new JFrame();
+    public static final JFrame frame = new JFrame();
     public static XInputDevice device;
 
     public static void main(String[] args) {
@@ -136,31 +136,31 @@ public class DiscordPlaysWSClient implements ActionListener {
     }
 
     private void initGUI() {
-        f.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("🇦").setBounds(445, 170, 50, 50).build());
-        f.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("🇧").setBounds(390, 225, 50, 50).build());
-        f.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("🇽").setBounds(390, 115, 50, 50).build());
-        f.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("🇾").setBounds(335, 170, 50, 50).build());
-        f.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("🇱").setBounds(60, 5, 160, 50).build());
-        f.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("🇷").setBounds(335, 5, 160, 50).build());
+        frame.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("🇦").setBounds(445, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("🇧").setBounds(390, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("🇽").setBounds(390, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("🇾").setBounds(335, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("🇱").setBounds(60, 5, 160, 50).build());
+        frame.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("🇷").setBounds(335, 5, 160, 50).build());
 
-        f.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("🅱️").setBounds(445, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("🅱️").setBounds(445, 225, 50, 50).build());
 
-        f.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("➡️").setBounds(170, 170, 50, 50).build());
-        f.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("⬇️").setBounds(115, 225, 50, 50).build());
-        f.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("⬆️").setBounds(115, 115, 50, 50).build());
-        f.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("⬅️").setBounds(60, 170, 50, 50).build());
-        f.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("↗️").setBounds(170, 115, 50, 50).build());
-        f.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("↘️").setBounds(170, 225, 50, 50).build());
-        f.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("↖️").setBounds(60, 115, 50, 50).build());
-        f.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("↙️").setBounds(60, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("➡️").setBounds(170, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("⬇️").setBounds(115, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("⬆️").setBounds(115, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("⬅️").setBounds(60, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("↗️").setBounds(170, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("↘️").setBounds(170, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("↖️").setBounds(60, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("↙️").setBounds(60, 225, 50, 50).build());
 
-        f.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("⏩").setBounds(225, 170, 50, 50).build());
-        f.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("⏬").setBounds(115, 280, 50, 50).build());
-        f.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 60, 50, 50).build());
-        f.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("⏩").setBounds(225, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("⏬").setBounds(115, 280, 50, 50).build());
+        frame.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 60, 50, 50).build());
+        frame.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 170, 50, 50).build());
 
-        f.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 335, 160, 50).build());
-        f.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 335, 160, 50).build());
+        frame.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 335, 160, 50).build());
+        frame.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 335, 160, 50).build());
 
         JMenuBar bar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -171,11 +171,11 @@ public class DiscordPlaysWSClient implements ActionListener {
         menu.add("Version ~ " + VERSION);
         bar.add(menu);
 
-        f.setJMenuBar(bar);
-        f.setSize(560, 450);
-        f.setResizable(false);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLayout(null);
-        f.setVisible(true);
+        frame.setJMenuBar(bar);
+        frame.setSize(560, 450);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 }
