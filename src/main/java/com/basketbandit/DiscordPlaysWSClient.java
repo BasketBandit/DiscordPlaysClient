@@ -44,36 +44,11 @@ public class DiscordPlaysWSClient implements ActionListener {
         } catch(IOException e) {
             log.error("There was an error loading the configuration file, message: {}", e.getMessage(), e);
         }
-        initGUI();
         initXInputDevice();
+        initGUI();
         startConnection(ip, port);
         ScheduleHandler.registerJob(new OneSecondlyJob());
         ScheduleHandler.registerJob(new TenMillisecondlyJob());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()) {
-            case "connect" : {
-                if(clientSocket.isClosed()) {
-                    startConnection(ip, port);
-                }
-                return;
-            }
-            case "disconnect" : {
-                if(!clientSocket.isClosed()) {
-                    stopConnection();
-                }
-                return;
-            }
-            case "connect_controller" : {
-                if(!device.isConnected()) {
-                    initXInputDevice();
-                }
-                return;
-            }
-        }
-        sendMessage(e.getActionCommand());
     }
 
     public void startConnection(String ip, int port) {
@@ -108,6 +83,31 @@ public class DiscordPlaysWSClient implements ActionListener {
         } catch(Exception e) {
             log.error("There was a problem stopping socket connection, message: {}", e.getMessage(), e);
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        switch(e.getActionCommand()) {
+            case "connect" : {
+                if(clientSocket.isClosed()) {
+                    startConnection(ip, port);
+                }
+                return;
+            }
+            case "disconnect" : {
+                if(!clientSocket.isClosed()) {
+                    stopConnection();
+                }
+                return;
+            }
+            case "connect_controller" : {
+                if(!device.isConnected()) {
+                    initXInputDevice();
+                }
+                return;
+            }
+        }
+        sendMessage(e.getActionCommand());
     }
 
     private void initXInputDevice() {
