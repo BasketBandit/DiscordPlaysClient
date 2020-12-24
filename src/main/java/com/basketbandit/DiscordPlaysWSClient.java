@@ -136,31 +136,31 @@ public class DiscordPlaysWSClient implements ActionListener {
     }
 
     private void initGUI() {
-        frame.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("🇦").setBounds(445, 170, 50, 50).build());
-        frame.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("🇧").setBounds(390, 225, 50, 50).build());
-        frame.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("🇽").setBounds(390, 115, 50, 50).build());
-        frame.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("🇾").setBounds(335, 170, 50, 50).build());
-        frame.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("🇱").setBounds(60, 5, 160, 50).build());
-        frame.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("🇷").setBounds(335, 5, 160, 50).build());
+        frame.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("A").setBounds(445, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("B").setBounds(390, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("X").setBounds(390, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("Y").addActionListener(this).setActionCommand("Y").setBounds(335, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("L").addActionListener(this).setActionCommand("LB").setBounds(60, 5, 160, 50).build());
+        frame.add(new ButtonBuilder("R").addActionListener(this).setActionCommand("RB").setBounds(335, 5, 160, 50).build());
 
-        frame.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("🅱️").setBounds(445, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("B!").addActionListener(this).setActionCommand("HB").setBounds(445, 225, 50, 50).build());
 
-        frame.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("➡️").setBounds(170, 170, 50, 50).build());
-        frame.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("⬇️").setBounds(115, 225, 50, 50).build());
-        frame.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("⬆️").setBounds(115, 115, 50, 50).build());
-        frame.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("⬅️").setBounds(60, 170, 50, 50).build());
-        frame.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("↗️").setBounds(170, 115, 50, 50).build());
-        frame.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("↘️").setBounds(170, 225, 50, 50).build());
-        frame.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("↖️").setBounds(60, 115, 50, 50).build());
-        frame.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("↙️").setBounds(60, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("➡").addActionListener(this).setActionCommand("R").setBounds(170, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⬇").addActionListener(this).setActionCommand("D").setBounds(115, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("⬆").addActionListener(this).setActionCommand("U").setBounds(115, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("⬅").addActionListener(this).setActionCommand("L").setBounds(60, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("↗").addActionListener(this).setActionCommand("UR").setBounds(170, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("↘").addActionListener(this).setActionCommand("DR").setBounds(170, 225, 50, 50).build());
+        frame.add(new ButtonBuilder("↖").addActionListener(this).setActionCommand("UL").setBounds(60, 115, 50, 50).build());
+        frame.add(new ButtonBuilder("↙").addActionListener(this).setActionCommand("DL").setBounds(60, 225, 50, 50).build());
 
-        frame.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("⏩").setBounds(225, 170, 50, 50).build());
-        frame.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("⏬").setBounds(115, 280, 50, 50).build());
-        frame.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("⏫").setBounds(115, 60, 50, 50).build());
-        frame.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("⏪").setBounds(5, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⏩").addActionListener(this).setActionCommand("R1").setBounds(225, 170, 50, 50).build());
+        frame.add(new ButtonBuilder("⏬").addActionListener(this).setActionCommand("D1").setBounds(115, 280, 50, 50).build());
+        frame.add(new ButtonBuilder("⏫").addActionListener(this).setActionCommand("U1").setBounds(115, 60, 50, 50).build());
+        frame.add(new ButtonBuilder("⏪").addActionListener(this).setActionCommand("L1").setBounds(5, 170, 50, 50).build());
 
-        frame.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("⏸️").setBounds(115, 335, 160, 50).build());
-        frame.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("⏯️").setBounds(280, 335, 160, 50).build());
+        frame.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("P").setBounds(115, 335, 160, 50).build());
+        frame.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("S").setBounds(280, 335, 160, 50).build());
 
         JMenuBar bar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
