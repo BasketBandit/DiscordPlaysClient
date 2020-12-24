@@ -5,11 +5,11 @@ import com.basketbandit.scheduler.tasks.IsAliveTask;
 
 import java.util.concurrent.TimeUnit;
 
-public class FiveSecondlyJob extends Job {
+public class OneSecondlyJob extends Job {
     private final IsAliveTask isAliveTask = new IsAliveTask();
 
-    public FiveSecondlyJob() {
-        super(0, 5, TimeUnit.SECONDS);
+    public OneSecondlyJob() {
+        super(0, 1, TimeUnit.SECONDS);
     }
 
     @Override
