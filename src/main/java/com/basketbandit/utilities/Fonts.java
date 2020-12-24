@@ -8,7 +8,7 @@ public class Fonts {
 
     static {
         try {
-            DEFAULT = Font.createFont(Font.TRUETYPE_FONT, Fonts.class.getResourceAsStream("/unifont-13.0.04.ttf")).deriveFont(Font.PLAIN, 32);
+            DEFAULT = Font.createFont(Font.TRUETYPE_FONT, Fonts.class.getResourceAsStream("/fonts/unifont-13.0.04.ttf")).deriveFont(Font.PLAIN, 32);
         } catch(FontFormatException | IOException e) {
             e.printStackTrace();
         }
