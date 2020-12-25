@@ -27,6 +27,7 @@ public class DiscordPlaysWSClient implements ActionListener {
     public static Socket clientSocket = new Socket();
     private static PrintWriter out;
     private static BufferedReader in;
+    private String nickname = "";
     private String ip = "127.0.0.1"; // default ip
     private int port = 3197; // default port
     public static final JFrame frame = new JFrame();
@@ -39,11 +40,13 @@ public class DiscordPlaysWSClient implements ActionListener {
     DiscordPlaysWSClient() {
         try(InputStream inputStream = new FileInputStream("./config.yaml")) {
             Map<String, String> config = new Yaml().load(inputStream);
+            nickname = config.get("nickname");
             ip = config.get("ip_address");
             port = Integer.parseInt(config.get("port"));
         } catch(IOException e) {
             log.error("There was an error loading the configuration file, message: {}", e.getMessage(), e);
         }
+
         initXInputDevice();
         initGUI();
         startConnection(ip, port);
@@ -58,19 +61,30 @@ public class DiscordPlaysWSClient implements ActionListener {
             clientSocket.setKeepAlive(true);
             out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
-            sendMessage("H-hi DiscordPlaysSocketServer-senpai! u/////u");
+            if(!sendMessage("id:" + nickname).endsWith("nickname!")) {
+                sendMessage("H-hi DiscordPlaysSocketServer-senpai! u/////u");
+            } else {
+                clientSocket.close();
+                log.warn("Client socket has closed.");
+            }
         } catch(IOException e) {
             log.error("There was an error starting connection with websocket, message: {}", e.getMessage(), e);
         }
     }
 
-    public void sendMessage(String msg) {
+    public String sendMessage(String msg) {
         try {
-            log.info("DiscordPlaysSocketClient Outputs: \"{}\"", msg);
-            out.println(msg);
-            log.info("DiscordPlaysSocketServer Replies: \"{}\"", in.readLine());
+            if(clientSocket.isConnected()) {
+                log.info("DiscordPlaysSocketClient Outputs: \"{}\"", msg);
+                out.println(msg);
+                String reply = in.readLine();
+                log.info("DiscordPlaysSocketServer Replies: \"{}\"", reply);
+                return reply;
+            }
+            return "";
         } catch(Exception e) {
-            log.error("There was a problem sending message, message: {}", e.getMessage(), e);
+            log.error("There was a problem sending message, message: {}", e.getMessage());
+            return "";
         }
     }
 
