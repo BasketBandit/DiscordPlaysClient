@@ -6,7 +6,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 group = 'com.basketbandit'
-project.version = '0.4.0'
+project.version = '0.4.1'
 sourceCompatibility = 1.8
 mainClassName = 'com.basketbandit.DiscordPlaysWSClient'
 

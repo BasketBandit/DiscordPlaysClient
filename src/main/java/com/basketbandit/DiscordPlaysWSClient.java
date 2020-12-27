@@ -22,7 +22,13 @@ import java.util.Map;
 
 public class DiscordPlaysWSClient implements ActionListener {
     private static final Logger log = LoggerFactory.getLogger(DiscordPlaysWSClient.class);
-    public static final String VERSION = "0.4.0";
+    public static final String VERSION = "0.4.1";
+
+    // UI
+    public static final JFrame frame = new JFrame();
+    private static JMenu playerMenu;
+
+    // Socket
     public static Socket clientSocket = new Socket();
     private static PrintWriter out;
     private static BufferedReader in;
@@ -30,10 +36,25 @@ public class DiscordPlaysWSClient implements ActionListener {
     private static String ip = "127.0.0.1"; // default ip
     public static int player = 1;
     private static int port = 3197; // default port
-    public static XInputDevice device;
 
-    public static final JFrame frame = new JFrame();
-    private static JMenu playerMenu;
+    // Controller
+    public static XInputDevice device;
+    SimpleXInputDeviceListener deviceListener = new SimpleXInputDeviceListener() {
+        @Override
+        public void connected() {
+            log.info("Controller connected! :D");
+        }
+
+        @Override
+        public void disconnected() {
+            log.info("Controller disconnected! :(");
+        }
+
+        @Override
+        public void buttonChanged(final XInputButton button, final boolean pressed) {
+            sendCommand((button + "_" + pressed).toUpperCase());
+        }
+    };
 
     public static void main(String[] args) {
         new DiscordPlaysWSClient();
@@ -49,8 +70,8 @@ public class DiscordPlaysWSClient implements ActionListener {
             log.error("There was an error loading the configuration file, message: {}", e.getMessage(), e);
         }
 
-        initXInputDevice();
-        initGUI();
+        registerXInputDevice();
+        startUI();
         startConnection(ip, port);
         ScheduleHandler.registerJob(new OneSecondlyJob());
         ScheduleHandler.registerJob(new TenMillisecondlyJob());
@@ -128,12 +149,14 @@ public class DiscordPlaysWSClient implements ActionListener {
             }
             case "CONTROLLER_CONNECT" : {
                 if(device == null || !device.isConnected()) {
-                    initXInputDevice();
+                    registerXInputDevice();
                 }
                 return;
             }
             case "CONTROLLER_DISCONNECT" : {
-                device = null;
+                if(device != null) {
+                    destroyXInputDevice();
+                }
                 return;
             }
         }
@@ -150,32 +173,21 @@ public class DiscordPlaysWSClient implements ActionListener {
         sendCommand(command);
     }
 
-    private void initXInputDevice() {
+    private void registerXInputDevice() {
         try {
             device = XInputDevice.getDeviceFor(0);
-            device.addListener(
-                    new SimpleXInputDeviceListener() {
-                        @Override
-                        public void connected() {
-                            log.info("Controller connected! :D");
-                        }
-
-                        @Override
-                        public void disconnected() {
-                            log.info("Controller disconnected! :(");
-                        }
-
-                        @Override
-                        public void buttonChanged(final XInputButton button, final boolean pressed) {
-                            sendCommand((button + "_" + pressed).toUpperCase());
-                        }
-                    });
+            device.addListener(deviceListener);
         } catch(XInputNotLoadedException e) {
             log.error("There was an error when initialising controller, message: {}", e.getMessage(), e);
         }
     }
 
-    private void initGUI() {
+    private void destroyXInputDevice() {
+        device.removeListener(deviceListener);
+        device = null;
+    }
+
+    private void startUI() {
         frame.add(new ButtonBuilder("A").addActionListener(this).setActionCommand("A").setBounds(445, 170, 50, 50).build());
         frame.add(new ButtonBuilder("B").addActionListener(this).setActionCommand("B").setBounds(390, 225, 50, 50).build());
         frame.add(new ButtonBuilder("X").addActionListener(this).setActionCommand("X").setBounds(390, 115, 50, 50).build());
@@ -244,7 +256,6 @@ public class DiscordPlaysWSClient implements ActionListener {
                 System.exit(0);
             }
         });
-
 
         frame.setSize(560, 450);
         frame.setResizable(false);
