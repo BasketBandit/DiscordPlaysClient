@@ -92,7 +92,11 @@ public class DiscordPlaysWSClient implements ActionListener {
     }
 
     public void sendCommand(String cmd) {
-        sendMessage(player + "#" + cmd); // prepend play number to input commands
+        if(cmd.startsWith("STATE")) {
+            sendMessage(cmd);
+        } else {
+            sendMessage(player + "#" + cmd); // prepend play number to input commands
+        }
     }
 
     public void stopConnection() {
@@ -110,31 +114,31 @@ public class DiscordPlaysWSClient implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         final String command = e.getActionCommand();
         switch(command) {
-            case "connect" : {
+            case "CONNECT" : {
                 if(clientSocket.isClosed()) {
                     startConnection(ip, port);
                 }
                 return;
             }
-            case "disconnect" : {
+            case "DISCONNECT" : {
                 if(!clientSocket.isClosed()) {
                     stopConnection();
                 }
                 return;
             }
-            case "controller_connect" : {
+            case "CONTROLLER_CONNECT" : {
                 if(device == null || !device.isConnected()) {
                     initXInputDevice();
                 }
                 return;
             }
-            case "controller_disconnect" : {
+            case "CONTROLLER_DISCONNECT" : {
                 device = null;
                 return;
             }
         }
 
-        if(command.startsWith("player_switch")) {
+        if(command.startsWith("PLAYER_SWITCH")) {
             String[] params = command.split("#");
             playerMenu.getItem(player-1).setText("Player " + player);
             player = Integer.parseInt(params[1]);
@@ -198,26 +202,40 @@ public class DiscordPlaysWSClient implements ActionListener {
         frame.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("P").setBounds(115, 335, 160, 50).build());
         frame.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("S").setBounds(280, 335, 160, 50).build());
 
-        JMenuBar bar = new JMenuBar();
+
         JMenu socketMenu = new JMenu("Socket");
-        socketMenu.add(new MenuItemBuilder("Connect").addActionListener(this).setActionCommand("connect").build());
-        socketMenu.add(new MenuItemBuilder("Disconnect").addActionListener(this).setActionCommand("disconnect").build());
+        socketMenu.add(new MenuItemBuilder("Connect").addActionListener(this).setActionCommand("CONNECT").build());
+        socketMenu.add(new MenuItemBuilder("Disconnect").addActionListener(this).setActionCommand("DISCONNECT").build());
         socketMenu.addSeparator();
         socketMenu.add("Version ~ " + VERSION);
-        bar.add(socketMenu);
 
         JMenu controllerMenu = new JMenu("Controller");
-        controllerMenu.add(new MenuItemBuilder("Connect").addActionListener(this).setActionCommand("controller_connect").build());
-        controllerMenu.add(new MenuItemBuilder("Disconnect").addActionListener(this).setActionCommand("controller_disconnect").build());
-        bar.add(controllerMenu);
+        controllerMenu.add(new MenuItemBuilder("Connect").addActionListener(this).setActionCommand("CONTROLLER_CONNECT").build());
+        controllerMenu.add(new MenuItemBuilder("Disconnect").addActionListener(this).setActionCommand("CONTROLLER_DISCONNECT").build());
 
         playerMenu = new JMenu("Player");
-        playerMenu.add(new MenuItemBuilder("Player 1 <<").addActionListener(this).setActionCommand("player_switch#1").build());
-        playerMenu.add(new MenuItemBuilder("Player 2").addActionListener(this).setActionCommand("player_switch#2").build());
-        playerMenu.add(new MenuItemBuilder("Player 3").addActionListener(this).setActionCommand("player_switch#3").build());
-        playerMenu.add(new MenuItemBuilder("Player 4").addActionListener(this).setActionCommand("player_switch#4").build());
-        bar.add(playerMenu);
-        frame.setJMenuBar(bar);
+        playerMenu.add(new MenuItemBuilder("Player 1 <<").addActionListener(this).setActionCommand("PLAYER_SWITCH#1").build());
+        playerMenu.add(new MenuItemBuilder("Player 2").addActionListener(this).setActionCommand("PLAYER_SWITCH#2").build());
+        playerMenu.add(new MenuItemBuilder("Player 3").addActionListener(this).setActionCommand("PLAYER_SWITCH#3").build());
+        playerMenu.add(new MenuItemBuilder("Player 4").addActionListener(this).setActionCommand("PLAYER_SWITCH#4").build());
+
+        JMenu stateMenu = new JMenu("States");
+        stateMenu.add("SAVE");
+        stateMenu.add(new MenuItemBuilder("Slot 1").addActionListener(this).setActionCommand("STATE#S1").build());
+        stateMenu.add(new MenuItemBuilder("Slot 2").addActionListener(this).setActionCommand("STATE#S2").build());
+        stateMenu.add(new MenuItemBuilder("Slot 3").addActionListener(this).setActionCommand("STATE#S3").build());
+        stateMenu.addSeparator();
+        stateMenu.add("LOAD");
+        stateMenu.add(new MenuItemBuilder("Slot 1").addActionListener(this).setActionCommand("STATE#L1").build());
+        stateMenu.add(new MenuItemBuilder("Slot 2").addActionListener(this).setActionCommand("STATE#L2").build());
+        stateMenu.add(new MenuItemBuilder("Slot 3").addActionListener(this).setActionCommand("STATE#L3").build());
+
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(socketMenu);
+        menuBar.add(controllerMenu);
+        menuBar.add(playerMenu);
+        menuBar.add(stateMenu);
+        frame.setJMenuBar(menuBar);
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -226,6 +244,7 @@ public class DiscordPlaysWSClient implements ActionListener {
                 System.exit(0);
             }
         });
+
 
         frame.setSize(560, 450);
         frame.setResizable(false);
