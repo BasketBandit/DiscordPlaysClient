@@ -14,8 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -218,11 +217,18 @@ public class DiscordPlaysWSClient implements ActionListener {
         playerMenu.add(new MenuItemBuilder("Player 3").addActionListener(this).setActionCommand("player_switch#3").build());
         playerMenu.add(new MenuItemBuilder("Player 4").addActionListener(this).setActionCommand("player_switch#4").build());
         bar.add(playerMenu);
-
         frame.setJMenuBar(bar);
+
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                stopConnection();
+                System.exit(0);
+            }
+        });
+
         frame.setSize(560, 450);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setVisible(true);
     }
