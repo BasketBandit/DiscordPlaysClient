@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class DiscordPlaysWSClient implements ActionListener {
     private static final Logger log = LoggerFactory.getLogger(DiscordPlaysWSClient.class);
-    public static final String VERSION = "0.3.1";
+    public static final String VERSION = "0.4.0";
     public static Socket clientSocket = new Socket();
     private static PrintWriter out;
     private static BufferedReader in;
@@ -92,7 +92,7 @@ public class DiscordPlaysWSClient implements ActionListener {
     }
 
     public void sendCommand(String cmd) {
-        sendMessage(player + ":" + cmd); // prepend play number to input commands
+        sendMessage(player + "#" + cmd); // prepend play number to input commands
     }
 
     public void stopConnection() {
