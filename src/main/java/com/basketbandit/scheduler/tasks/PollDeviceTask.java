@@ -6,6 +6,8 @@ import com.basketbandit.scheduler.Task;
 public class PollDeviceTask implements Task {
     @Override
     public void run() {
-        DiscordPlaysWSClient.device.poll();
+        if(DiscordPlaysWSClient.device != null) {
+            DiscordPlaysWSClient.device.poll();
+        }
     }
 }
