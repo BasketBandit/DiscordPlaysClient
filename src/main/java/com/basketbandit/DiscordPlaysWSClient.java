@@ -228,7 +228,7 @@ public class DiscordPlaysWSClient extends JFrame implements ActionListener{
         this.add(new ButtonBuilder("START").addActionListener(this).setActionCommand("P").setBounds(115, 335, 160, 50).build());
         this.add(new ButtonBuilder("SELECT").addActionListener(this).setActionCommand("S").setBounds(280, 335, 160, 50).build());
 
-        JMenu socketMenu = new JMenu("Socket");
+        JMenu socketMenu = new JMenu("Server");
         socketMenu.add(new MenuItemBuilder("Connect").addActionListener(this).setActionCommand("CONNECT").build());
         socketMenu.add(new MenuItemBuilder("Disconnect").addActionListener(this).setActionCommand("DISCONNECT").build());
         socketMenu.addSeparator();
