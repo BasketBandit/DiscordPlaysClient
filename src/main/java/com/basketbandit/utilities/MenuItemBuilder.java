@@ -9,8 +9,7 @@ public class MenuItemBuilder {
 
     public MenuItemBuilder(String text) {
         this.item = new JMenuItem(text);
-        this.item.setFont(Fonts.DEFAULT);
-        this.item.setMargin(new Insets(-10, -10, -10, -10));
+        this.item.setFont(this.item.getFont().deriveFont(Font.PLAIN, 18));
     }
 
     public MenuItemBuilder setText(String label) {

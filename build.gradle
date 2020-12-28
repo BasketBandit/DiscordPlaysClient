@@ -6,8 +6,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 group = 'com.basketbandit'
-project.version = '0.4.1'
-sourceCompatibility = 1.8
+project.version = '0.4.2'
+sourceCompatibility = 1.15
 mainClassName = 'com.basketbandit.DiscordPlaysWSClient'
 
 tasks.withType(JavaCompile) {
@@ -22,13 +22,15 @@ repositories {
 }
 
 ext {
+    substance  = '3.5.1'         // https://mvnrepository.com/artifact/org.pushing-pixels/radiance-substance
     jxinput    = '1.0.1'         // https://mvnrepository.com/artifact/com.xenoamess/JXInput
     snakeYaml  = '1.27'          // https://mvnrepository.com/artifact/org.yaml/snakeyaml
     slf4jApi   = '2.0.0-alpha1'  // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 }
 
 dependencies {
-    compile group: 'org.yaml', name: 'snakeyaml', version: snakeYaml
+    compile group: 'org.pushing-pixels', name: 'radiance-substance', version: substance
     compile group: 'com.xenoamess', name: 'JXInput', version: jxinput
+    compile group: 'org.yaml', name: 'snakeyaml', version: snakeYaml
     compile group: 'org.slf4j', name: 'slf4j-simple', version: slf4jApi
 }

@@ -9,8 +9,7 @@ public class ButtonBuilder {
 
     public ButtonBuilder(String text) {
         this.button = new JButton(text);
-        this.button.setFont(Fonts.DEFAULT);
-        this.button.setMargin(new Insets(-10, -10, -10, -10));
+        this.button.setFont(this.button.getFont().deriveFont(Font.PLAIN, 18));
     }
 
     public ButtonBuilder setText(String label) {
