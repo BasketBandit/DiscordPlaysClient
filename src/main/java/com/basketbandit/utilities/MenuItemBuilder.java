@@ -12,11 +12,6 @@ public class MenuItemBuilder {
         this.item.setFont(this.item.getFont().deriveFont(Font.PLAIN, 18));
     }
 
-    public MenuItemBuilder setText(String label) {
-        this.item.setText(label);
-        return this;
-    }
-
     public MenuItemBuilder addActionListener(ActionListener actionListener) {
         this.item.addActionListener(actionListener);
         return this;

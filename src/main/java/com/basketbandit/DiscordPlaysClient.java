@@ -26,8 +26,8 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class DiscordPlaysWSClient extends JFrame implements ActionListener{
-    private static final Logger log = LoggerFactory.getLogger(DiscordPlaysWSClient.class);
+public class DiscordPlaysClient extends JFrame implements ActionListener{
+    private static final Logger log = LoggerFactory.getLogger(DiscordPlaysClient.class);
     public static final String VERSION = "0.4.2";
 
     // UI
@@ -69,12 +69,12 @@ public class DiscordPlaysWSClient extends JFrame implements ActionListener{
             } catch (Exception e) {
                 System.out.println("Substance Graphite failed to initialize");
             }
-            DiscordPlaysWSClient w = new DiscordPlaysWSClient();
+            DiscordPlaysClient w = new DiscordPlaysClient();
             w.setVisible(true);
         });
     }
 
-    DiscordPlaysWSClient() {
+    DiscordPlaysClient() {
         try(InputStream inputStream = new FileInputStream("./config.yaml")) {
             Map<String, Object> config = new Yaml().load(inputStream);
             nickname = (String)config.get("nickname");
@@ -149,25 +149,25 @@ public class DiscordPlaysWSClient extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         final String command = e.getActionCommand();
         switch(command) {
-            case "CONNECT" : {
+            case "CONNECT" -> {
                 if(clientSocket.isClosed()) {
                     startConnection(ip, port);
                 }
                 return;
             }
-            case "DISCONNECT" : {
+            case "DISCONNECT" -> {
                 if(!clientSocket.isClosed()) {
                     stopConnection();
                 }
                 return;
             }
-            case "CONTROLLER_CONNECT" : {
+            case "CONTROLLER_CONNECT" -> {
                 if(device == null || !device.isConnected()) {
                     registerXInputDevice();
                 }
                 return;
             }
-            case "CONTROLLER_DISCONNECT" : {
+            case "CONTROLLER_DISCONNECT" -> {
                 if(device != null) {
                     destroyXInputDevice();
                 }

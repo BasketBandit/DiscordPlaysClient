@@ -12,11 +12,6 @@ public class ButtonBuilder {
         this.button.setFont(this.button.getFont().deriveFont(Font.PLAIN, 18));
     }
 
-    public ButtonBuilder setText(String label) {
-        this.button.setText(label);
-        return this;
-    }
-
     public ButtonBuilder addActionListener(ActionListener actionListener) {
         this.button.addActionListener(actionListener);
         return this;
